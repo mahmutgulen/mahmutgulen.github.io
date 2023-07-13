@@ -15,5 +15,10 @@
     text-decoration: none;
     margin: 5px 2px;
     border-radius: 50%;
-    color:black;
+    background: black;
+    color: red;
+}
+
+.fa:hover{
+    background: rgb(48, 48, 48);
 }
