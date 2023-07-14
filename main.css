@@ -27,6 +27,7 @@
     font-size: 60px;
     transition-duration: 0.7s;
     letter-spacing: 3px; 
+    text-shadow: 0 0 15px  #211b8d;
 }
 #name:hover{
     transition-duration: 0.7s;
@@ -38,6 +39,7 @@
     font-size: 30px;
     transition-duration: 0.7s;
     letter-spacing: 3px; 
+    text-shadow: 0 0 15px  #211b8d;
 }
 #title:hover{
     transition-duration: 0.7s;
@@ -66,6 +68,7 @@
     background: black;
     color: white;
     transition-duration: 0.5s;
+    text-shadow: 0 0 25px #2017cf;
 }
 
 .fa:hover{
