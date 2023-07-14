@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500&family=VT323&display=swap');
+#textBody{
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    color: white;
+    font-family: 'Oswald', sans-serif;
+}
+
+#name{
+    font-size: 60px;
+    transition-duration: 0.7s;
+    text-shadow: 0 0 15px  #f6134b;
+}
+#name:hover{
+    transition-duration: 0.7s;
+	text-shadow: 0 0 15px  #ff85a3;
+    font-size: 130px;
+}
+
+
+#backgroundBody {
+    background-color:#464646;
+    background-image: url(sbg.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    width: auto;
+}
+
