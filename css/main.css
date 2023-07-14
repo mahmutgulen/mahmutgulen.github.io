@@ -49,7 +49,7 @@
 }
 #backgroundBody {
     background-color:#464646;
-    background-image: url(spaceman.png);
+    background-image: url(../images/spaceman.png);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
