@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="mystil.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#signUp').click(function () {
+                $('.left').addClass('d-none');
+                $('.right').addClass('d-none');
+                $('.c-left').removeClass('d-none');
+                $('.c-right').removeClass('d-none');
+            });
+
+            $('#signIn').click(function () {
+                $('.c-left').addClass('d-none');
+                $('.c-right').addClass('d-none');
+                $('.left').removeClass('d-none');
+                $('.right').removeClass('d-none');
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="container">
+
+
+        <div class="left animate__animated animate__fadeInLeft">
+            <h1>Sign In</h1>
+            <div class="socialButtons">
+                <div class="item">
+                    <i class="fa-brands fa-google-plus-g"></i>
+                </div>
+                <div class="item">
+                    <i class="fa-brands fa-facebook-f"></i>
+                </div>
+                <div class="item">
+                    <i class="fa-brands fa-github"></i>
+                </div>
+                <div class="item">
+                    <i class="fa-brands fa-linkedin-in"></i>
+                </div>
+            </div>
+            <span class="infoText">or use your email password</span>
+            <div class="inputContainer">
+                <input type="text" placeholder="Email">
+                <input type="password" placeholder="Password">
+            </div>
+            <a href="#" class="forgetButton">Forget Your Password?</a>
+            <a href="#" class="signButton">SIGN IN</a>
+        </div>
+
+        <div class="right">
+            <h1 class="animate__animated animate__fadeInUp">Hello, Friend!</h1>
+            <span class="animate__animated animate__fadeInUp">Register with your personal destails to use all of site features</span>
+            <a href="#" id="signUp" class="animate__animated animate__fadeInUp">SIGN UP</a>
+        </div>
+
+        <div class="c-left d-none">
+            <h1 class="animate__animated animate__fadeInUp">Welcome Back!</h1>
+            <span class="animate__animated animate__fadeInUp">Enter your personal details to use all of site features</span>
+            <a href="#" id="signIn" class="animate__animated animate__fadeInUp">SIGN IN</a>
+        </div>
+
+
+
+        <div class="c-right d-none animate__animated animate__fadeInRight">
+            <h1>Create Account</h1>
+            <div class="socialButtons">
+                <div class="item">
+                    <i class="fa-brands fa-google-plus-g"></i>
+                </div>
+                <div class="item">
+                    <i class="fa-brands fa-facebook-f"></i>
+                </div>
+                <div class="item">
+                    <i class="fa-brands fa-github"></i>
+                </div>
+                <div class="item">
+                    <i class="fa-brands fa-linkedin-in"></i>
+                </div>
+            </div>
+            <span class="infoText">or use your email for registeration</span>
+            <div class="inputContainer">
+                <input type="text" placeholder="Name">
+                <input type="text" placeholder="Email">
+                <input type="password" placeholder="Password">
+            </div>
+            <a href="#" class="signButton">SIGN UP</a>
+        </div>
+
+    </div>
+</body>
+
+</html>
