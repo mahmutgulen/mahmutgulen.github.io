@@ -4,105 +4,191 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" href="mystil.css">
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
         integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <title>aradigimibul.com</title>
+    <style>
+        @keyframes wave {
+            0% {
+                background-position: 0% 50%;
+            }
 
-    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+            50% {
+                background-position: 100% 50%;
+            }
 
-    <script>
-        $(document).ready(function () {
-            $('#signUp').click(function () {
-                $('.left').addClass('d-none');
-                $('.right').addClass('d-none');
-                $('.c-left').removeClass('d-none');
-                $('.c-right').removeClass('d-none');
-            });
+            100% {
+                background-position: 0% 50%;
+            }
+        }
 
-            $('#signIn').click(function () {
-                $('.c-left').addClass('d-none');
-                $('.c-right').addClass('d-none');
-                $('.left').removeClass('d-none');
-                $('.right').removeClass('d-none');
-            });
-        });
-    </script>
+
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            font-family: "Montserrat", sans-serif;
+            background: linear-gradient(90deg, rgba(223, 224, 240, 1) 0%, rgba(201, 204, 250, 1) 100%);
+            background-size: 200% auto;
+            animation: wave 3s linear infinite;
+        }
+
+        .title {
+            color: #373968;
+            font-size: 60px;
+            margin-bottom: 2%;
+        }
+
+        .mailBox {
+            background-color: #b9badc;
+            width: 400px;
+            height: 75px;
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .mailBox input {
+            height: 100%;
+            width: 68%;
+            border-radius: 15px 0 0 15px;
+            border: 0;
+            background-color: transparent;
+            color: #fff;
+            padding-left: 10px;
+            font-size: 16px;
+        }
+
+        .mailBox input::placeholder {
+            font-size: 14px;
+            color: #dfe0f0;
+        }
+
+        .mailBox input:focus {
+            outline: none;
+        }
+
+        .mailBox a {
+            text-decoration: none;
+            color: #fff;
+            background-color: #43457f;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 28%;
+            height: 80%;
+            border-radius: 15px;
+            font-weight: 300;
+        }
+
+        #fingerPrint {
+            color: #373968;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 25px;
+        }
+
+        .slogan {
+            color: #373968;
+            margin-bottom: 1%;
+            font-size: 18px;
+        }
+
+        .footer {
+            color: #373968;
+            position: absolute;
+            bottom: 2%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /*responsive*/
+        /*1024px*/
+        @media screen and (min-width: 1024px) and (max-width: 1024px) {
+            .mailBox {
+                height: 65px;
+            }
+
+            .mailBox a {
+                height: 70%;
+                font-size: 14px;
+            }
+
+            #fingerPrint {
+                font-size: 20px;
+            }
+        }
+
+        /*mobil*/
+        @media screen and (max-width: 768px) {
+            .slogan {
+                font-size: 12px;
+                margin-bottom: 7%;
+            }
+
+            .title {
+                font-size: 35px;
+                margin-bottom: 7%;
+            }
+
+            .footer {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 12px;
+            }
+
+            .mailBox {
+                width: 80%;
+                height: 50px;
+                border-radius: 10px;
+            }
+
+            .mailBox a {
+                font-size: 11px;
+                border-radius: 10px;
+            }
+
+            #fingerPrint {
+                font-size: 20px;
+                top: 10px;
+                left: 10px;
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <div class="container">
+    <i class="fa-solid fa-fingerprint animate__animated animate__slideInLeft" id="fingerPrint"></i>
 
-
-        <div class="left animate__animated animate__fadeInLeft">
-            <h1>Sign In</h1>
-            <div class="socialButtons">
-                <div class="item">
-                    <i class="fa-brands fa-google-plus-g"></i>
-                </div>
-                <div class="item">
-                    <i class="fa-brands fa-facebook-f"></i>
-                </div>
-                <div class="item">
-                    <i class="fa-brands fa-github"></i>
-                </div>
-                <div class="item">
-                    <i class="fa-brands fa-linkedin-in"></i>
-                </div>
-            </div>
-            <span class="infoText">or use your email password</span>
-            <div class="inputContainer">
-                <input type="text" placeholder="Email">
-                <input type="password" placeholder="Password">
-            </div>
-            <a href="#" class="forgetButton">Forget Your Password?</a>
-            <a href="#" class="signButton">SIGN IN</a>
-        </div>
-
-        <div class="right">
-            <h1 class="animate__animated animate__fadeInUp">Hello, Friend!</h1>
-            <span class="animate__animated animate__fadeInUp">Register with your personal destails to use all of site features</span>
-            <a href="#" id="signUp" class="animate__animated animate__fadeInUp">SIGN UP</a>
-        </div>
-
-        <div class="c-left d-none">
-            <h1 class="animate__animated animate__fadeInUp">Welcome Back!</h1>
-            <span class="animate__animated animate__fadeInUp">Enter your personal details to use all of site features</span>
-            <a href="#" id="signIn" class="animate__animated animate__fadeInUp">SIGN IN</a>
-        </div>
-
-
-
-        <div class="c-right d-none animate__animated animate__fadeInRight">
-            <h1>Create Account</h1>
-            <div class="socialButtons">
-                <div class="item">
-                    <i class="fa-brands fa-google-plus-g"></i>
-                </div>
-                <div class="item">
-                    <i class="fa-brands fa-facebook-f"></i>
-                </div>
-                <div class="item">
-                    <i class="fa-brands fa-github"></i>
-                </div>
-                <div class="item">
-                    <i class="fa-brands fa-linkedin-in"></i>
-                </div>
-            </div>
-            <span class="infoText">or use your email for registeration</span>
-            <div class="inputContainer">
-                <input type="text" placeholder="Name">
-                <input type="text" placeholder="Email">
-                <input type="password" placeholder="Password">
-            </div>
-            <a href="#" class="signButton">SIGN UP</a>
-        </div>
-
+    <div class="slogan animate__animated animate__slideInDown">
+        aradığını bulmak için biraz daha dayan
     </div>
+    <span class="title animate__animated animate__zoomIn">aradigimibul.com</span>
+    <div class="mailBox animate__animated animate__slideInDown">
+        <input type="text" placeholder="e-mail adresiniz" id="email">
+        <a href="#" id="submitButton">İletişime Geç</a>
+    </div>
+
+    <span class="footer">©2024 | senin için geliştiriyoruz</span>
 </body>
 
 </html>
