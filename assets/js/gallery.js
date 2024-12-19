@@ -7,17 +7,32 @@ var itemQuantity = 5;
 var page = 1;
 
 $(document).ready(function () {
+
+    toastr.options = {
+        "closeButton": false,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": false,
+        "positionClass": "toast-top-right",
+        "timeOut": "3000",
+        "extendedTimeOut": "1000"
+    };
+
     loadScreen();
     loadBackgroundColors();
+
+    $(".closeScreen input").on("paste", function (event) {
+        event.preventDefault();
+    });
 });
 
 function loadScreen() {
-    scrollToControlRange();
     var onBtn = $('.closeScreen .onBtn');
     onBtn.css('display', 'block');
     onBtn.animate({
         'opacity': '1',
     }, 500);
+    scrollToControlRange();
 }
 
 function btnScreenOn() {
@@ -47,7 +62,7 @@ function btnScreenOn() {
         }
     }
     else {
-        alert('Görüntülmek istediğiniz resim sayısını girin.');
+        toastr.error('Görüntülmek istediğiniz resim sayısını girin.',);
     }
 }
 
@@ -67,8 +82,6 @@ function btnScreenOff() {
     $('.galleryContainer').html('');
     $('.closeScreen input').val('');
 }
-
-
 
 function btnShuffle() {
     var galleryContainer = $('.galleryContainer');
@@ -127,25 +140,6 @@ function dataSeeding(itemQuantity, page) {
         });
 }
 
-
-// function getImages(itemQuantity, page) {
-//     return new Promise((resolve, reject) => {
-//         $.ajax({
-//             url: `https://picsum.photos/v2/list?page=${page}&limit=${itemQuantity}`,
-//             type: 'GET',
-//             dataType: 'json',
-//             success: function (response) {
-//                 resolve(response);  // Başarılı olduğunda yanıtı resolve et
-//             },
-//             error: function (xhr, status, error) {
-//                 console.error('Hata:', error);
-//                 alert('API isteğinde bir hata oluştu!');
-//                 reject(error);  // Hata durumunda reject et
-//             }
-//         });
-//     });
-// }
-
 function getImages(itemQuantity, page) {
     return new Promise((resolve, reject) => {
         $.ajax({
@@ -163,14 +157,12 @@ function getImages(itemQuantity, page) {
             },
             error: function (xhr, status, error) {
                 console.error('Hata:', error);
-                alert('API isteğinde bir hata oluştu!');
+                toastr.error('API isteğinde bir hata oluştu!',);
                 reject(error);
             }
         });
     });
 }
-
-
 
 function scrollToControlRange() {
     //scroll to range
@@ -320,22 +312,18 @@ function closeBigImageBoxButton() {
 }
 
 function nextButton() {
-    if ($('.galleryBox').length - 1 != lastClickBox) {
-        var nextImage = $(`[data-id="${lastClickBox + 1}"]`).children('img').attr('src');
-
-        $('.bigImageBox img').attr('src', resizeImage(nextImage));
-
-        lastClickBox = lastClickBox + 1;
-
+    var nextElement = $(`[data-id="${lastClickBox}"]`).next();
+    if (nextElement.length) {
+        $('.bigImageBox img').attr('src', resizeImage(nextElement.children('img').attr('src')));
+        lastClickBox = nextElement.attr('data-id');
     }
 }
 
 function prevButton() {
-    if (lastClickBox > 0) {
-        var prevImage = $(`[data-id="${lastClickBox - 1}"]`).children('img').attr('src');
-        $('.bigImageBox img').attr('src', resizeImage(prevImage));
-        lastClickBox = lastClickBox - 1;
-
+    var prevImage = $(`[data-id="${lastClickBox}"]`).prev();
+    if (prevImage.length) {
+        $('.bigImageBox img').attr('src', resizeImage(prevImage.children('img').attr('src')));
+        lastClickBox = prevImage.attr('data-id');
     }
 }
 
@@ -362,7 +350,7 @@ function downloadThis() {
     downloadLink.click();
 }
 
-
 function resizeImage(src) {
     return src.replace(/\/\d+\/\d+$/, '/1000/1000');
 }
+
