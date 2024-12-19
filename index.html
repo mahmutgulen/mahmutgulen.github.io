@@ -4,191 +4,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-        rel="stylesheet">
-    <title>aradigimibul.com</title>
-    <style>
-        @keyframes wave {
-            0% {
-                background-position: 0% 50%;
-            }
+    <title>Jquery With Gallery</title>
 
-            50% {
-                background-position: 100% 50%;
-            }
+    <!-- Custom Css -->
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <!-- Jquery -->
+    <script src="assets/js/jquery-3.7.1.min.js"></script>
+    <!-- Gallery Js -->
+    <script src="assets/js/gallery.js"></script>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="/assets/css/all.min.css">
+    <script src="/assets/js/fontawesome.min.js"></script>
 
-            100% {
-                background-position: 0% 50%;
-            }
-        }
-
-
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            flex-direction: column;
-            font-family: "Montserrat", sans-serif;
-            background: linear-gradient(90deg, rgba(223, 224, 240, 1) 0%, rgba(201, 204, 250, 1) 100%);
-            background-size: 200% auto;
-            animation: wave 3s linear infinite;
-        }
-
-        .title {
-            color: #373968;
-            font-size: 60px;
-            margin-bottom: 2%;
-        }
-
-        .mailBox {
-            background-color: #b9badc;
-            width: 400px;
-            height: 75px;
-            border-radius: 15px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .mailBox input {
-            height: 100%;
-            width: 68%;
-            border-radius: 15px 0 0 15px;
-            border: 0;
-            background-color: transparent;
-            color: #fff;
-            padding-left: 10px;
-            font-size: 16px;
-        }
-
-        .mailBox input::placeholder {
-            font-size: 14px;
-            color: #dfe0f0;
-        }
-
-        .mailBox input:focus {
-            outline: none;
-        }
-
-        .mailBox a {
-            text-decoration: none;
-            color: #fff;
-            background-color: #43457f;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 28%;
-            height: 80%;
-            border-radius: 15px;
-            font-weight: 300;
-        }
-
-        #fingerPrint {
-            color: #373968;
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            font-size: 25px;
-        }
-
-        .slogan {
-            color: #373968;
-            margin-bottom: 1%;
-            font-size: 18px;
-        }
-
-        .footer {
-            color: #373968;
-            position: absolute;
-            bottom: 2%;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        /*responsive*/
-        /*1024px*/
-        @media screen and (min-width: 1024px) and (max-width: 1024px) {
-            .mailBox {
-                height: 65px;
-            }
-
-            .mailBox a {
-                height: 70%;
-                font-size: 14px;
-            }
-
-            #fingerPrint {
-                font-size: 20px;
-            }
-        }
-
-        /*mobil*/
-        @media screen and (max-width: 768px) {
-            .slogan {
-                font-size: 12px;
-                margin-bottom: 7%;
-            }
-
-            .title {
-                font-size: 35px;
-                margin-bottom: 7%;
-            }
-
-            .footer {
-                width: 100%;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                font-size: 12px;
-            }
-
-            .mailBox {
-                width: 80%;
-                height: 50px;
-                border-radius: 10px;
-            }
-
-            .mailBox a {
-                font-size: 11px;
-                border-radius: 10px;
-            }
-
-            #fingerPrint {
-                font-size: 20px;
-                top: 10px;
-                left: 10px;
-            }
-        }
-    </style>
 </head>
 
 <body>
-    <i class="fa-solid fa-fingerprint animate__animated animate__slideInLeft" id="fingerPrint"></i>
 
-    <div class="slogan animate__animated animate__slideInDown">
-        aradığını bulmak için biraz daha dayan
-    </div>
-    <span class="title animate__animated animate__zoomIn">aradigimibul.com</span>
-    <div class="mailBox animate__animated animate__slideInDown">
-        <input type="text" placeholder="e-mail adresiniz" id="email">
-        <a href="#" id="submitButton">İletişime Geç</a>
+    <div class="loadingIcon">
+        <i class="fa-solid fa-spinner fa-spin-pulse"></i>
     </div>
 
-    <span class="footer">©2024 | senin için geliştiriyoruz</span>
+    <div class="closeBigImageBoxButton" onclick="closeBigImageBoxButton()">
+        <i class="fa-solid fa-xmark"></i>
+    </div>
+
+    <div class="screenSizeButtons" onclick="btnScreenSizeToggle()">
+        <i class="fa-solid fa-compress"></i>
+    </div>
+
+    <div class="downloadButton" onclick="downloadThis()">
+        <i class="fa-solid fa-download"></i>
+    </div>
+
+    <div class="bigImageBox">
+        <div class="prevButton" onclick="prevButton()">
+            <i class="fa-solid fa-chevron-left"></i>
+        </div>
+        <div class="nextButton" onclick="nextButton()">
+            <i class="fa-solid fa-chevron-right"></i>
+        </div>
+    </div>
+    <div class="backgroundColors"></div>
+    <div class="closeScreen">
+        <i class="fa-solid fa-power-off onBtn" onclick="btnScreenOn()"></i>
+        <input type="number" placeholder="enter number">
+    </div>
+    <header>
+        <ul>
+            <li class="btnRefresh" onclick="btnRefresh()"><i class="fa-solid fa-arrows-rotate"></i></li>
+            <li class="btnShuffle"><i class="fa-solid fa-shuffle" onclick="btnShuffle()"></i></li>
+            <li class="btnScreenOff" onclick="btnScreenOff()"><i class="fa-solid fa-power-off"></i></li>
+        </ul>
+    </header>
+
+    <div class="galleryContainer">
+
+    </div>
+
+    <div id="scroll-control">
+        <input type="range" id="scroll-slider" min="0" max="100" value="0" />
+    </div>
 </body>
 
 </html>
