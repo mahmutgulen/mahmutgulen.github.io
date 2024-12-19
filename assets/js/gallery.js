@@ -2,6 +2,7 @@ var lastBackgroundColor = "";
 var lastClickBox = 0;
 var isFullScreen = true;
 
+var downloadUrl = "";
 var itemQuantity = 5;
 var page = 1;
 
@@ -11,7 +12,7 @@ $(document).ready(function () {
 });
 
 function loadScreen() {
-    startEngine();
+    scrollToControlRange();
     var onBtn = $('.closeScreen .onBtn');
     onBtn.css('display', 'block');
     onBtn.animate({
@@ -25,8 +26,13 @@ function btnScreenOn() {
     var onBtn = $('.closeScreen .onBtn');
 
     if (input.val().length && Number(input.val()) != 0) {
+
         //sayıyı al isteğe çık
-        dataSeeding(input.val(), page);
+        if (input.val() > 100) {
+            input.val('100');
+        }
+        itemQuantity = Number(input.val());
+        dataSeeding(itemQuantity, page);
 
         //iş yükünü kontrol et, yüklenene kadar açma
         if (true) {
@@ -62,9 +68,7 @@ function btnScreenOff() {
     $('.closeScreen input').val('');
 }
 
-function startEngine() {
-    scrollToControlRange();
-}
+
 
 function btnShuffle() {
     var galleryContainer = $('.galleryContainer');
@@ -97,15 +101,14 @@ function dataSeeding(itemQuantity, page) {
             var imagesLoaded = 0;
             var totalImages = response.length;
 
-            console.log('balsd :' + new Date().getSeconds());
             $.each(response, function (index, item) {
-
-
 
                 var imgElement = $('<img>', {
                     src: item.download_url,
                     alt: item.author,
-                    title: item.author
+                    title: item.author,
+                    loading: 'lazy',
+                    'data-download': item.url
                 }).on('load', function () {
                     imagesLoaded++;
                     if (imagesLoaded === totalImages) {
@@ -123,7 +126,25 @@ function dataSeeding(itemQuantity, page) {
             $('.loadingIcon').hide();
         });
 }
- 
+
+
+// function getImages(itemQuantity, page) {
+//     return new Promise((resolve, reject) => {
+//         $.ajax({
+//             url: `https://picsum.photos/v2/list?page=${page}&limit=${itemQuantity}`,
+//             type: 'GET',
+//             dataType: 'json',
+//             success: function (response) {
+//                 resolve(response);  // Başarılı olduğunda yanıtı resolve et
+//             },
+//             error: function (xhr, status, error) {
+//                 console.error('Hata:', error);
+//                 alert('API isteğinde bir hata oluştu!');
+//                 reject(error);  // Hata durumunda reject et
+//             }
+//         });
+//     });
+// }
 
 function getImages(itemQuantity, page) {
     return new Promise((resolve, reject) => {
@@ -132,16 +153,24 @@ function getImages(itemQuantity, page) {
             type: 'GET',
             dataType: 'json',
             success: function (response) {
-                resolve(response);  // Başarılı olduğunda yanıtı resolve et
+                // Resimlerin boyutlarını küçültmek için URL'leri yeniden düzenle
+                const resizedImages = response.map(image => ({
+                    ...image,
+                    url: image.download_url,
+                    download_url: `${image.download_url.split('/id/')[0]}/id/${image.id}/200/200`
+                }));
+                resolve(resizedImages);
             },
             error: function (xhr, status, error) {
                 console.error('Hata:', error);
                 alert('API isteğinde bir hata oluştu!');
-                reject(error);  // Hata durumunda reject et
+                reject(error);
             }
         });
     });
 }
+
+
 
 function scrollToControlRange() {
     //scroll to range
@@ -232,9 +261,12 @@ function showThis(item) {
         "height": "600px"
     }, 500);
 
+    downloadUrl = item.children('img').attr('data-download');
+
     bigImageBox.append(`
-        <image src="${item.children('img').attr('src')}" title="${item.children('img').attr('title')}" alt="${item.children('img').attr('alt')}"/>
+        <image src="${resizeImage(item.children('img').attr('src'))}" title="${item.children('img').attr('title')}" alt="${item.children('img').attr('alt')}"/>
         `);
+
 
     $('body').css({
         'background-image': 'unset',
@@ -243,6 +275,7 @@ function showThis(item) {
 }
 
 function closeBigImageBoxButton() {
+    isFullScreen = true;
     //fade in buttons
     $('header').fadeIn(300);
     $('#scroll-slider').fadeIn(300);
@@ -289,16 +322,20 @@ function closeBigImageBoxButton() {
 function nextButton() {
     if ($('.galleryBox').length - 1 != lastClickBox) {
         var nextImage = $(`[data-id="${lastClickBox + 1}"]`).children('img').attr('src');
-        $('.bigImageBox img').attr('src', nextImage);
+
+        $('.bigImageBox img').attr('src', resizeImage(nextImage));
+
         lastClickBox = lastClickBox + 1;
+
     }
 }
 
 function prevButton() {
     if (lastClickBox > 0) {
         var prevImage = $(`[data-id="${lastClickBox - 1}"]`).children('img').attr('src');
-        $('.bigImageBox img').attr('src', prevImage);
+        $('.bigImageBox img').attr('src', resizeImage(prevImage));
         lastClickBox = lastClickBox - 1;
+
     }
 }
 
@@ -318,12 +355,14 @@ function btnScreenSizeToggle() {
 }
 
 function downloadThis() {
-    var imageUrl = $('.bigImageBox img').attr('src');
-
     var downloadLink = document.createElement('a');
-    downloadLink.href = imageUrl;
+    downloadLink.href = downloadUrl;
     downloadLink.download = 'download.jpg';
+    downloadLink.target = '_blank';
     downloadLink.click();
 }
 
 
+function resizeImage(src) {
+    return src.replace(/\/\d+\/\d+$/, '/1000/1000');
+}
