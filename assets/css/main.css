@@ -1,0 +1,433 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #fff;
+    font-size: 16px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background-image: linear-gradient(179deg, rgba(0, 0, 0, 1) 9.2%, rgb(0, 50, 91) 103.9%);
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+header ul {
+    list-style: none;
+    display: flex;
+    gap: 100px;
+}
+
+header ul li {
+    position: relative;
+    transition: all ease .3s;
+    height: 70px;
+    width: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all ease .2s;
+    cursor: pointer;
+}
+
+header ul li:hover {
+    text-shadow: 0px 0px 50px #fff;
+}
+
+
+header ul li i {
+    color: #fff;
+    font-size: 35px;
+    transition: all ease .6s;
+}
+
+header ul li:hover i {
+    font-size: 50px;
+    transform: rotate(360deg);
+}
+
+.galleryContainer {
+    width: 75%;
+    background-color: #3e3e3e;
+    position: absolute;
+    top: 20%;
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 10px;
+    column-gap: 10px;
+    justify-content: space-evenly;
+    height: auto;
+    min-height: 600px;
+    max-height: 600px;
+    border-radius: 300px;
+    box-shadow: 0 40px 90px rgba(0, 0, 0, 0.3);
+    transition: all ease .5s;
+    padding: 20px;
+    overflow-y: scroll;
+}
+
+/*Scrollu Gizliyorum*/
+.galleryContainer::-webkit-scrollbar {
+    display: none;
+}
+
+.galleryContainer {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    overflow: auto;
+}
+
+
+.galleryContainer:hover {
+    transform: scale(1.02);
+    background-color: #2d2d2d;
+}
+
+.galleryContainer .galleryBox {
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+    border-radius: 40px;
+}
+
+.galleryContainer .galleryBox::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    z-index: 1;
+    transition: all ease .2s;
+}
+
+.galleryContainer .galleryBox::after {
+    content: '\f002';
+    font-family: 'FontAwesome';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    z-index: 1;
+    transition: all ease .4s;
+    color: white;
+    font-size: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.galleryContainer .galleryBox img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all ease .2s;
+}
+
+.galleryContainer .galleryBox:hover img {
+    transform: scale(1.1);
+}
+
+.galleryContainer .galleryBox:hover:before {
+    opacity: .5;
+}
+
+.galleryContainer .galleryBox:hover::after {
+    opacity: 1;
+    font-size: 50px;
+}
+
+/* Slider kontrolü */
+#scroll-control {
+    position: absolute;
+    top: 90%;
+    width: 50%;
+}
+
+#scroll-slider {
+    width: 100%;
+}
+
+
+input[type="range"] {
+    -webkit-appearance: none;
+    /* Safari ve Chrome varsayılan stillerini kaldır */
+    appearance: none;
+    /* Genel varsayılan stilleri kaldır */
+    width: 100%;
+    /* Genişlik ayarla */
+    height: 20px;
+    /* Yüksekliği ayarla */
+    background: #ddd;
+    /* Arka plan rengi */
+    border-radius: 50px;
+    /* Köşeleri yuvarlat */
+    outline: none;
+    /* Kenarlık kaldır */
+}
+
+/* Slider için hareketli topu (thumb) kişiselleştirme */
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    /* Varsayılan görünümü kaldır */
+    appearance: none;
+    width: 30px;
+    /* Genişlik */
+    height: 30px;
+    /* Yükseklik */
+    background: #ffffff;
+    /* Renk */
+    border-radius: 50%;
+    /* Daire şekli */
+    cursor: pointer;
+    /* İmleç değiştirme */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
+    /* Hafif gölge */
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 30px;
+    /* Genişlik */
+    height: 30px;
+    /* Yükseklik */
+    background: #ffffff;
+    /* Renk */
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+input[type="range"]::-ms-thumb {
+    width: 30px;
+    /* Genişlik */
+    height: 30px;
+    /* Yükseklik */
+    background: #ffffff;
+    /* Renk */
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.closeScreen {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    z-index: 2;
+    opacity: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.closeScreen input {
+    border: 1px solid #000000;
+    background-color: rgba(255 255 255 / .3);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 15px;
+    font-size: 16px;
+}
+
+.closeScreen input:focus {
+    outline: none;
+    border-color: rgba(255 255 255 / .3);
+    box-shadow: inset 0 0px 5px rgba(255 255 255 / .3), 0 0 40px 0px rgba(255 255 255 / .3);
+}
+
+.closeScreen input::placeholder {
+    color: #fff;
+}
+
+
+
+.closeScreen .onBtn {
+    opacity: 0;
+    cursor: pointer;
+    transition: all ease .2s;
+    color: white;
+    font-size: 100px;
+    padding: 20px;
+}
+
+.closeScreen .onBtn:hover {
+    color: #0e680e;
+}
+
+.backgroundColors {
+    position: fixed;
+    height: 30px;
+    background-color: rgba(0 0 0 / .1);
+    left: 20px;
+    bottom: 20px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding: 5px 0 5px 5px;
+    z-index: 1;
+}
+
+.backgroundColors .colorItem {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    cursor: pointer;
+    position: relative;
+}
+
+.backgroundColors .colorItem.randomColor::before {
+    content: '\3f';
+    font-family: 'FontAwesome';
+    color: black;
+    font-size: 12px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.bigImageBox {
+    width: 0;
+    height: 0;
+    background-color: black;
+    top: 50%;
+    transform: translateY(-46%);
+    z-index: 2;
+    border-radius: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+}
+
+.bigImageBox img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 300px;
+}
+
+
+.bigImageBox .prevButton,
+.bigImageBox .nextButton {
+    position: absolute;
+    top: 46%;
+    color: #fff;
+    font-size: 70px;
+    opacity: 0.7;
+    transition: all ease .2s;
+    cursor: pointer;
+    display: none;
+}
+
+.bigImageBox .prevButton {
+    left: -10%;
+}
+
+.bigImageBox .nextButton {
+    right: -10%;
+}
+
+
+
+.closeBigImageBoxButton {
+    position: absolute;
+    right: 4%;
+    top: 3%;
+    color: #fff;
+    font-size: 70px;
+    opacity: 0.7;
+    transition: all ease .2s;
+    cursor: pointer;
+    display: none;
+}
+
+
+.screenSizeButtons {
+    position: absolute;
+    right: 15%;
+    top: 18%;
+    color: #fff;
+    font-size: 30px;
+    opacity: 0.7;
+    transition: all ease .2s;
+    cursor: pointer;
+    display: none;
+}
+
+.downloadButton {
+    position: absolute;
+    right: 2%;
+    bottom: 3%;
+    color: #fff;
+    font-size: 30px;
+    opacity: 0.7;
+    transition: all ease .2s;
+    cursor: pointer;
+    display: none;
+}
+
+.bigImageBox .prevButton:hover,
+.bigImageBox .nextButton:hover,
+.closeBigImageBoxButton:hover,
+.screenSizeButtons:hover,
+.downloadButton:hover {
+    opacity: 1;
+    text-shadow: 0px 0px 50px #fff;
+}
+
+.loadingIcon {
+    font-size: 50px;
+    color: white;
+    background-color: #000;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    display: none;
+    position: relative;
+}
+
+.loadingIcon i {
+    position: absolute;
+    left: 49%;
+    top: 48%;
+}
